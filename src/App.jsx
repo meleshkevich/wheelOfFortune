@@ -1,33 +1,25 @@
 import { useEffect, useState } from 'react';
+import { useGlobalContext } from './context';
+import WinSliceSelect from './components/WinSliceSelect';
+import SliceAmountSelect from './components/SliceAmountSelect';
+import ButtonGroup from './components/ButtonGroup';
 
 function App() {
-  const [spinningWheelSliceList, setSpinningWheelSliceList] = useState([
-    { id: 1, text: 'Slice 1' },
-    { id: 2, text: 'Slice 2' },
-    { id: 3, text: 'Slice 3' },
-    { id: 4, text: 'Slice 4' },
-    { id: 5, text: 'Slice 5' },
-    { id: 6, text: 'Slice 6' },
-    { id: 7, text: 'Slice 7' },
-    { id: 8, text: 'Slice 8' },
-    { id: 9, text: 'Slice 9' },
-    { id: 10, text: 'Slice 10' },
-    { id: 11, text: 'Slice 11' },
-    { id: 12, text: 'Slice 12' },
-    { id: 13, text: 'Slice 13' },
-    { id: 14, text: 'Slice 14' },
-  ]);
-
-  const [winSliceId, setWinSliceId] = useState(7);
-
-  const [spinningWheelHtml, setSpinningWheelHtml] = useState(null);
+  const {
+    spinningWheelSliceList,
+    setSpinningWheelSliceList,
+    winSliceId,
+    setWinSliceId,
+    spinningWheelHtml,
+    setSpinningWheelHtml,
+  } = useGlobalContext();
 
   useEffect(() => {
     processSpinningWheelHtml();
   }, []);
 
   const calculateWheelSlices = () => {
-    const diameter = 365; // Hardcoded
+    const diameter = 365; // Hardcoded for dev
     const numberOfSlices = spinningWheelSliceList.length;
     const sliceAngle = 360 / numberOfSlices;
     const radius = diameter / 2;
@@ -35,7 +27,7 @@ function App() {
     const sliceHeight = circumference / numberOfSlices;
     const sliceOffset = sliceHeight / 2;
     const calculatedSliceHeight = sliceHeight / 2 + 4 + 'px';
-    const sliceColor = '#095B8D'; // Hardcoded
+    const sliceColor = '#095B8D'; // Hardcoded for dev
 
     return {
       diameter,
@@ -63,6 +55,7 @@ function App() {
   };
 
   const processSpinningWheelHtml = () => {
+    console.log(spinningWheelSliceList, 'spinningWheelSliceList');
     const { diameter, sliceAngle, sliceHeight, sliceOffset } =
       calculateWheelSlices();
 
@@ -102,17 +95,6 @@ function App() {
     processWheelSlices();
   };
 
-  const onStartAnimation = () => {
-    console.log('start animation');
-
-    const wheel = document.getElementById('wheel');
-    const pointer = document.getElementById('spinningWheelPanel-pointer');
-    wheel.classList.remove('dial-spinning');
-    wheel.classList.remove('dial-stop');
-    pointer.classList.remove('spinningWheelPanel-pointer-animate');
-    wheel.classList.add('dial-spinning');
-  };
-
   const onStopAnimation = () => {
     console.log('stop animation');
 
@@ -149,35 +131,12 @@ function App() {
   return (
     <>
       <h2 className="title">Wheel of Fortune</h2>
+
       <div className="wheel-container">
         <div className="wheel-control">
-          <select
-            value={winSliceId}
-            onChange={(e) => setWinSliceId(e.target.value)}
-          >
-            {spinningWheelSliceList.map((slice) => {
-              const { id, text } = slice;
-              return (
-                <option key={id} value={id}>
-                  {text}
-                </option>
-              );
-            })}
-          </select>
-          <button
-            type="button"
-            className="btn"
-            onClick={() => onStartAnimation()}
-          >
-            Start
-          </button>
-          <button
-            type="button"
-            className="btn"
-            onClick={() => onStopAnimation()}
-          >
-            Stop
-          </button>
+          <SliceAmountSelect />
+          <WinSliceSelect />
+          <ButtonGroup />
         </div>
 
         <div className="wheel-panel">
