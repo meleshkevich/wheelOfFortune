@@ -1,4 +1,5 @@
 import { ANIMATION_START, ANIMATION_STOP } from './actions';
+import { calculatedSliceAngle, winSliceId } from './utils';
 
 const reducer = (state, action) => {
   if (action.type === ANIMATION_START) {
@@ -12,38 +13,33 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ANIMATION_STOP) {
-    console.log('ANIMATION_STOP');
+    const pointer = document.getElementById('spinningWheelPanel-pointer');
+    const wheel = document.getElementById('wheel');
+    const sliceAngle = calculatedSliceAngle.angle;
+    const halfSlice = (sliceAngle / 2) * 0.9;
+    const decelerateSmoothAngle = Math.floor(
+      Math.random() * (2 * halfSlice + 1) - halfSlice
+    );
 
-    //TODO: correctly import calculateWheelSlices() func
+    const calculatedWinSlice =
+      (winSliceId.id - (90 / sliceAngle + 1)) * sliceAngle;
+    const decelerateWinAngle =
+      1080 - calculatedWinSlice + decelerateSmoothAngle;
 
-    // const pointer = document.getElementById('spinningWheelPanel-pointer');
-    // const wheel = document.getElementById('wheel');
-    // const { sliceAngle } = calculateWheelSlices();
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    const styleSheet = style.sheet;
 
-    // const halfSlice = (sliceAngle / 2) * 0.9;
-    // const decelerateSmoothAngle = Math.floor(
-    //   Math.random() * (2 * halfSlice + 1) - halfSlice
-    // );
+    const decelerate = `
+      @keyframes decelerate {
+        from { transform: rotate(0); }
+        to { transform: rotate(${decelerateWinAngle}deg); }
+      }
+    `;
 
-    // const calculatedWinSlice =
-    //   (winSliceId - (90 / sliceAngle + 1)) * sliceAngle;
-    // const decelerateWinAngle =
-    //   1080 - calculatedWinSlice + decelerateSmoothAngle;
-
-    // const style = document.createElement('style');
-    // document.head.appendChild(style);
-    // const styleSheet = style.sheet;
-
-    // const decelerate = `
-    //   @keyframes decelerate {
-    //     from { transform: rotate(0); }
-    //     to { transform: rotate(${decelerateWinAngle}deg); }
-    //   }
-    // `;
-
-    // styleSheet.insertRule(decelerate, 0);
-    // pointer.classList.add('spinningWheelPanel-pointer-animate');
-    // wheel.classList.add('dial-stop');
+    styleSheet.insertRule(decelerate, 0);
+    pointer.classList.add('spinningWheelPanel-pointer-animate');
+    wheel.classList.add('dial-stop');
     return { ...state };
   }
 

@@ -3,10 +3,11 @@ import { useGlobalContext } from './context';
 import WinSliceSelect from './components/WinSliceSelect';
 import SliceAmountSelect from './components/SliceAmountSelect';
 import ButtonGroup from './components/ButtonGroup';
-
+import { calculateSliceAngle } from './utils';
 function App() {
   const {
     spinningWheelSliceList,
+    amountOfSlices,
     setSpinningWheelSliceList,
     winSliceId,
     setWinSliceId,
@@ -56,9 +57,9 @@ function App() {
 
   const processSpinningWheelHtml = () => {
     console.log(spinningWheelSliceList, 'spinningWheelSliceList');
-    const { diameter, sliceAngle, sliceHeight, sliceOffset } =
+    const { diameter, sliceAngle, sliceHeight, sliceOffset, numberOfSlices } =
       calculateWheelSlices();
-
+    calculateSliceAngle(numberOfSlices);
     const spinningWheelElements = spinningWheelSliceList.map((slice, i) => (
       <div
         key={slice.id}
@@ -96,8 +97,6 @@ function App() {
   };
 
   const onStopAnimation = () => {
-    console.log('stop animation');
-
     const pointer = document.getElementById('spinningWheelPanel-pointer');
     const wheel = document.getElementById('wheel');
     const { sliceAngle } = calculateWheelSlices();
