@@ -6,6 +6,7 @@ import {
   createContext,
 } from 'react';
 import reducer from './reducer';
+
 import { ANIMATION_START, ANIMATION_STOP } from './actions';
 const AppContext = createContext();
 

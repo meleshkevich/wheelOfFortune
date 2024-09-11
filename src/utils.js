@@ -26,9 +26,9 @@ export const winSliceId = {};
 
 export const calculateSliceAngle = (numberOfSlices) => {
   calculatedSliceAngle.angle = 360 / numberOfSlices;
-  return 360 / numberOfSlices; // Hardcoded for dev
+  return 360 / numberOfSlices; 
 };
 
-export const setWinSliceId = (winSliceId) => {
+export const setWinSliceId = (winSliceId=7) => {
   winSliceId.id = winSliceId;
 };

@@ -12,6 +12,7 @@ html {
 
 :root {
   --sliceColor: #095b8d;
+  --decelerateWinAngle: 720deg;
   /* colors */
   --primary-100: #fae8ff;
   --primary-200: #f5d0fe;
@@ -383,5 +384,14 @@ ul {
   }
   to {
     transform: rotate(1800deg);
+  }
+}
+
+@keyframes decelerate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(var(--decelerateWinAngle));
   }
 }
