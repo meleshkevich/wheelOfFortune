@@ -26,22 +26,8 @@ const reducer = (state, action) => {
     const decelerateWinAngle =
       1080 - calculatedWinSlice + decelerateSmoothAngle;
 
-    //TODO: decelerateWinAngle NaN!!!!
-    // const root = document.documentElement;
-    // root.style.setProperty('--decelerateWinAngle', `${decelerateWinAngle}deg`);
-
-    console.log(`${decelerateWinAngle}deg`);
-
-    // const style = document.createElement('style');
-    // document.head.appendChild(style);
-    // const styleSheet = style.sheet;
-
-    // const decelerate = `@keyframes decelerate {
-    //     from { transform: rotate(0); }
-    //     to { transform: rotate(${decelerateWinAngle}deg); }
-    //   }`;
-
-    // styleSheet.insertRule(decelerate, 0);
+    const root = document.documentElement;
+    root.style.setProperty('--decelerateWinAngle', `${decelerateWinAngle}deg`);
 
     pointer.classList.add('spinningWheelPanel-pointer-animate');
     wheel.classList.add('dial-stop');

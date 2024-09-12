@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useGlobalContext } from './context';
-import WinSliceSelect from './components/WinSliceSelect';
-import SliceAmountSelect from './components/SliceAmountSelect';
-import ButtonGroup from './components/ButtonGroup';
+import ControlButtonsGroup from './components/ControlButtonsGroup';
 import { calculateSliceAngle } from './utils';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack';
+import SelectorsGroup from './components/SelectorsGroup';
+
 function App() {
   const {
     spinningWheelSliceList,
@@ -96,56 +100,30 @@ function App() {
     processWheelSlices();
   };
 
-  const onStopAnimation = () => {
-    const pointer = document.getElementById('spinningWheelPanel-pointer');
-    const wheel = document.getElementById('wheel');
-    const { sliceAngle } = calculateWheelSlices();
-
-    const halfSlice = (sliceAngle / 2) * 0.9;
-    const decelerateSmoothAngle = Math.floor(
-      Math.random() * (2 * halfSlice + 1) - halfSlice
-    );
-
-    const calculatedWinSlice =
-      (winSliceId - (90 / sliceAngle + 1)) * sliceAngle;
-    const decelerateWinAngle =
-      1080 - calculatedWinSlice + decelerateSmoothAngle;
-
-    const style = document.createElement('style');
-    document.head.appendChild(style);
-    const styleSheet = style.sheet;
-
-    const decelerate = `
-      @keyframes decelerate {
-        from { transform: rotate(0); }
-        to { transform: rotate(${decelerateWinAngle}deg); }
-      }
-    `;
-
-    styleSheet.insertRule(decelerate, 0);
-    pointer.classList.add('spinningWheelPanel-pointer-animate');
-    wheel.classList.add('dial-stop');
-  };
-
   return (
     <>
       <h2 className="title">Wheel of Fortune</h2>
-
-      <div className="wheel-container">
-        <div className="wheel-control">
-          <SliceAmountSelect />
-          <WinSliceSelect />
-          <ButtonGroup />
-        </div>
-
-        <div className="wheel-panel">
-          <div>{spinningWheelHtml} </div>
-          <div
-            className="spinningWheelPanel-pointer"
-            id="spinningWheelPanel-pointer"
-          ></div>
-        </div>
-      </div>
+      <Container>
+        <Row className="wheel-container">
+          <Col sm={4} className="wheel-control">
+            <Stack gap={1}>
+              <div className="p-2">
+                <SelectorsGroup />
+              </div>
+              <div className="p-2">
+                <ControlButtonsGroup />
+              </div>
+            </Stack>
+          </Col>
+          <Col sm={8} className="wheel-panel">
+            <div>{spinningWheelHtml} </div>
+            <div
+              className="spinningWheelPanel-pointer"
+              id="spinningWheelPanel-pointer"
+            ></div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
