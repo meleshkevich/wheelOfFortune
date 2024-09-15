@@ -3,7 +3,7 @@ import { useGlobalContext } from '../context';
 
 import Form from 'react-bootstrap/Form';
 
-//TODO: process winID and amountofSlices correctly!!!!
+//TODO: process  amountofSlices correctly!!!!
 
 function SelectorsGroup() {
   const {
@@ -27,7 +27,7 @@ function SelectorsGroup() {
           <option value="14">14</option>
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" ccontrolId="selectorsGroup.winId">
+      <Form.Group className="mb-3" controlId="selectorsGroup.winId">
         <Form.Label>Winner Slice:</Form.Label>
         <Form.Select
           aria-label="set win slice id"

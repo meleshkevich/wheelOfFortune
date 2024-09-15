@@ -5,17 +5,10 @@ import {
   useState,
   createContext,
 } from 'react';
-import reducer from './reducer';
 
-import { ANIMATION_START, ANIMATION_STOP } from './actions';
 const AppContext = createContext();
 
-const initialState = {
-  loading: false,
-};
-
 export const AppProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const [spinningWheelSliceList, setSpinningWheelSliceList] = useState([
     { id: 1, text: 'Slice 1' },
     { id: 2, text: 'Slice 2' },
@@ -37,18 +30,9 @@ export const AppProvider = ({ children }) => {
   const [amountOfSlices, setAmountOfSlices] = useState(10);
   const [spinningWheelHtml, setSpinningWheelHtml] = useState('');
 
-  const onStartAnimation = () => {
-    dispatch({ type: ANIMATION_START });
-  };
-
-  const onStopAnimation = () => {
-    dispatch({ type: ANIMATION_STOP });
-  };
-
   return (
     <AppContext.Provider
       value={{
-        ...state,
         spinningWheelSliceList,
         setSpinningWheelSliceList,
         winSliceId,
@@ -57,8 +41,6 @@ export const AppProvider = ({ children }) => {
         setAmountOfSlices,
         spinningWheelHtml,
         setSpinningWheelHtml,
-        onStartAnimation,
-        onStopAnimation,
       }}
     >
       {children}
