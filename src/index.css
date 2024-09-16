@@ -11,6 +11,7 @@ html {
 } /*16px*/
 
 :root {
+  /* wheel properties */
   --sliceColor: #095b8d;
   --decelerateWinAngle: 720deg;
   /* colors */
@@ -262,7 +263,7 @@ ul {
 .spinningWheelPanel-pointer {
   position: absolute;
   left: 935px;
-  top: 480px;
+  top: 520px;
   width: 0;
   height: 0;
   border-left: 40px solid transparent;
@@ -277,10 +278,10 @@ ul {
 
 @keyframes moveUp {
   0% {
-    top: 480px;
+    top: 520;
   }
   100% {
-    top: 390px;
+    top: 440px;
   }
 }
 

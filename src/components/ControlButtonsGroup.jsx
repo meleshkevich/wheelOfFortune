@@ -36,12 +36,24 @@ const ControlButtonsGroup = () => {
   };
 
   return (
-    <>
-      <ButtonGroup size="lg" className="mb-2" gap={3}>
-        <Button onClick={() => onStartAnimation()}>Start</Button>
-        <Button onClick={() => onStopAnimation()}>Stop</Button>
-      </ButtonGroup>
-    </>
+    <div className="p-2 d-flex gap-2" style={{ gap: '10px' }}>
+      <Button
+        variant="primary"
+        size="lg"
+        className="w-100"
+        onClick={() => onStartAnimation()}
+      >
+        Start
+      </Button>
+      <Button
+        variant="primary"
+        size="lg"
+        className="w-100"
+        onClick={() => onStopAnimation()}
+      >
+        Stop
+      </Button>
+    </div>
   );
 };
 
