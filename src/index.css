@@ -253,17 +253,21 @@ ul {
   margin: 0 auto;
   margin-top: 1rem;
 }
-*/ .wheel-container {
+.wheel-container {
   display: flex;
   justify-content: space-evenly;
+  &.row {
+    margin-top: -100px;
+  }
 }
+
 .wheel-control {
 }
 
 .spinningWheelPanel-pointer {
   position: absolute;
-  left: 935px;
-  top: 520px;
+  left: auto;
+  top: 470px;
   width: 0;
   height: 0;
   border-left: 40px solid transparent;
@@ -278,10 +282,10 @@ ul {
 
 @keyframes moveUp {
   0% {
-    top: 520;
+    top: 470;
   }
   100% {
-    top: 440px;
+    top: 430px;
   }
 }
 
@@ -289,7 +293,7 @@ ul {
   position: relative;
   border-radius: 100%;
   overflow: hidden;
-  left: 300px;
+  left: 0;
   top: 0;
 }
 

@@ -24,6 +24,8 @@ function SelectorsGroup() {
             <option value="10">10</option>
             <option value="12">12</option>
             <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="selectorsGroup.winId">

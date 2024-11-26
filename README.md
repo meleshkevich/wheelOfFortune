@@ -1,6 +1,6 @@
 ### Wheel Of Fortune
 
-- Dynamically render selected amount of sectors (to be fixed)
+- Dynamically render selected amount of sectors
 - Selectable winner sector
 - Infinite spinning animation
-- Decelerate and stop animation on selected sector with random bias from center
+- Decelerate and Stop animation on selected sector with random bias from its center

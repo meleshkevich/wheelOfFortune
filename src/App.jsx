@@ -11,8 +11,8 @@ function App() {
 
   return (
     <>
-      <h2 className="title">Wheel of Fortune</h2>
-      <Container className="mt-5">
+      <h2 className="title text-center">Wheel of Fortune</h2>
+      <Container className="d-flex justify-content-center align-items-center vh-100">
         <Row className="wheel-container">
           <Col sm={4} className="wheel-control">
             <Stack gap={1}>
@@ -20,8 +20,11 @@ function App() {
               <ControlButtonsGroup />
             </Stack>
           </Col>
-          <Col sm={8} className="wheel-panel">
-            <div>{spinningWheelHtml} </div>
+          <Col
+            sm={8}
+            className="wheel-panel d-flex flex-column align-items-center"
+          >
+            <div>{spinningWheelHtml}</div>
             <div
               className="spinningWheelPanel-pointer"
               id="spinningWheelPanel-pointer"

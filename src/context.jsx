@@ -4,31 +4,32 @@ import { calculateSliceAngle } from './utils';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [spinningWheelSliceList, setSpinningWheelSliceList] = useState([]);
+  const createDefaultSlices = (count) => {
+    const sliceList = [];
+    for (let i = 1; i <= count; i++) {
+      sliceList.push({
+        id: i,
+        text: `Sector ${i}`,
+      });
+    }
+    return sliceList;
+  };
+
+  const [spinningWheelSliceList, setSpinningWheelSliceList] = useState(() =>
+    createDefaultSlices(12)
+  );
   const [winSliceId, setWinSliceId] = useState(1);
-  const [amountOfSlices, setAmountOfSlices] = useState(10);
+  const [amountOfSlices, setAmountOfSlices] = useState(12);
   const [spinningWheelHtml, setSpinningWheelHtml] = useState('');
 
-  //TODO: process  amountofSlices correctly!!!!
-
   useEffect(() => {
-    processWheelSliceList(amountOfSlices);
-  }, [amountOfSlices]);
+    console.log('processWheelSliceList', amountOfSlices);
+    processSpinningWheelHtml();
+  }, [spinningWheelSliceList]);
 
   const processSliceAmountSelect = (sliceAmount) => {
     setAmountOfSlices(sliceAmount);
-  };
-
-  const processWheelSliceList = (amountOfSlices) => {
-    const sliceList = [];
-    for (let i = 1; i <= amountOfSlices; i++) {
-      sliceList.push({
-        id: i,
-        text: `Slice ${i}`,
-      });
-    }
-    setSpinningWheelSliceList(sliceList);
-    processSpinningWheelHtml();
+    setSpinningWheelSliceList(createDefaultSlices(sliceAmount));
   };
 
   const calculateWheelSlices = () => {
