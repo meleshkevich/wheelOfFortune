@@ -265,9 +265,9 @@ ul {
 }
 
 .spinningWheelPanel-pointer {
-  position: absolute;
+  position: relative;
   left: auto;
-  top: 470px;
+  top: 50px;
   width: 0;
   height: 0;
   border-left: 40px solid transparent;
@@ -282,10 +282,10 @@ ul {
 
 @keyframes moveUp {
   0% {
-    top: 470;
+    top: 50px;
   }
   100% {
-    top: 430px;
+    top: -20px;
   }
 }
 
